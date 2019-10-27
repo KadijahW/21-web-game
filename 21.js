@@ -27,7 +27,7 @@ let startButtonDIV = document.querySelector("#startGame")
 startButtonDIV.removeChild(button)
 
 let deckidURL = `https://deckofcardsapi.com/api/deck/${deckID}/draw/?count=2`
- //  console.log(deckidURL)
+//   console.log(deckidURL)
 let res = await axios.get(deckidURL)
 // console.log(res.data.cards)
 getPlayerCards(res)
@@ -35,32 +35,61 @@ getPlayerCards(res)
 
 const getPlayerCards = (res) => {
     let  startGameDIV = document.querySelector("#startGame")
-    let gameButtonDiv = document.querySelector("#gameButtons")
     let cardsDealt = res.data.cards
     // console.log(cardsDealt)
    
 for(let i = 0; i < cardsDealt.length; i++){
-    // let currentScore = document.createElement('p')
-    //     currentScore.innerText = cardsDealt[i].value
     let playerCards = cardsDealt[i].image
      let img = document.createElement('img')
      img.src = playerCards
-    //  startGameDIV.append(currentScore)
+
      startGameDIV.append(img)
      img.append(playerCards)
     // console.log(playerCards)
  }
+currentScore(res)
+}
 
- let hitButton = document.createElement("button")
- hitButton.innerHTML= "HIT"
- hitButton.addEventListener("click", hitAction)
+const currentScore = (res) => {
+let scoreBoard = document.querySelector("#score")
+let para = document.createElement('p')
+para.innerText = "Current Score: "
+let currScore = res.data.cards
+console.log(currScore)
+let count = 0;
+for(let i = 0; i < currScore.length; i++){
+let score = currScore[i].value
+// console.log(score)
+    if(score === "KING" || score === "QUEEN" || score === "JACK"){
+        score = parseInt("10") 
+        count += score
+    }else if(score === "ACE"){
+        score = parseInt("1")
+        count += score
+    }else{
+        count += parseInt(score)    
+    }
+}
+    // console.log(count)
+    scoreBoard.append(para)
+    para.append(count)
+  
+    gameButtons()
+}
 
- let stayButton = document.createElement("button")
- stayButton.innerHTML= "STAY"
- stayButton.addEventListener("click", stayAction)
-
- gameButtonDiv.append(hitButton)
- gameButtonDiv.append(stayButton)
+const gameButtons = () => {
+    let gameButtonDiv = document.querySelector("#gameButtons")
+ 
+    let hitButton = document.createElement("button")
+    hitButton.innerHTML= "HIT"
+    hitButton.addEventListener("click", hitAction)
+   
+    let stayButton = document.createElement("button")
+    stayButton.innerHTML= "STAY"
+    stayButton.addEventListener("click", stayAction)
+   
+    gameButtonDiv.append(hitButton)
+    gameButtonDiv.append(stayButton)
 }
 
 const hitAction = async(res) => {
@@ -75,15 +104,16 @@ const hitAction = async(res) => {
         let extraCard = image[i].image
         let newImg = document.createElement('img')
         newImg.src = extraCard
-        console.log(extraCard)
+        // console.log(extraCard)
 
          hitIMG.append(newImg)
          newImg.append(extraCard)
     }
-    console.log(image)
+    // console.log(image)
 }
 
 const stayAction = () => {
-    console.log("hi")
+    // console.log("hi")
+    event.preventDefault()
 
 }
