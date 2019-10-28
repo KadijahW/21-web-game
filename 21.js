@@ -84,6 +84,7 @@ gameButtons()
     let youWon_heading = document.createElement('h1')
     youWon_heading.innerText = "You Won!"
     heading.append(youWon_heading)
+    removeButtons()
     }
     else if(score > 21){
         busted()
@@ -212,8 +213,8 @@ const checkComputerScore =(score) => {
 } 
 
 const check21 = (count, compCount) => {
-    console.log(count)
-    console.log("COmp " , compCount)
+    // console.log(count)
+    // console.log("COmp " , compCount)
 if(count === compCount){
     // console.log("its a tie!")
     let heading = document.querySelector('#heading')
