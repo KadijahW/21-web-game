@@ -1,0 +1,66 @@
+body {
+    background-image: url("blackjackBG.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  h1{
+    font-size: 40px;
+      text-align: center;
+    color: aliceblue;
+
+  }
+
+  #startGame{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: space-between
+  }
+
+  #playerDIV{
+    justify-content: flex-start;
+  }
+
+  #compDIV{
+    justify-content: flex-end;
+  }
+
+#startGame button{
+ position:absolute;
+ transition: .5s ease;
+ top: 50%;
+ left: 45%;
+ background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  justify-content: center;
+}
+
+/* #hitBtn, #stayBtn{
+display: flex;
+flex: wrap;
+ background-color: #4CAF50;
+ color: white;
+ padding: 15px 32px;
+ text-align: center;
+ font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  justify-content: center;
+} */
+
+#score{
+    font-size: 40px;
+    font-weight: bold;
+    color: aliceblue;
+  text-align: center;
+
+}

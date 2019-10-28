@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 const startButton = () => {
-    const startButton = document.querySelector("#startButton")
+    const startButton = document.querySelector("#startGame")
     startButton.addEventListener('click', getCards)
 
 }
@@ -34,7 +34,7 @@ getPlayerCards(res)
 }
 
 const getPlayerCards = (res) => {
-    let  startGameDIV = document.querySelector("#startGame")
+    let  startGameDIV = document.querySelector("#playerDIV")
     let cardsDealt = res.data.cards
     // console.log(cardsDealt)
    
@@ -83,10 +83,12 @@ const gameButtons = () => {
  
     let hitButton = document.createElement("button")
     hitButton.innerHTML= "HIT"
+    hitButton.id = "hitBtn"
     hitButton.addEventListener("click", hitAction)
    
     let stayButton = document.createElement("button")
     stayButton.innerHTML= "STAY"
+    stayButton.id = "stayBtn"
     stayButton.addEventListener("click", stayAction)
    
     gameButtonDiv.append(hitButton)
@@ -98,18 +100,19 @@ const hitAction = async(res) => {
     url = `https://deckofcardsapi.com/api/deck/${deckID}/draw/?count=1`
     let oneCardResponse = await axios.get(url)
     
-    let hitIMG = document.querySelector("#startGame")
+    let hitIMG = document.querySelector("#playerDIV")
     let image = oneCardResponse.data.cards
+    let newImg = document.createElement('img')
+
+    hitIMG.append(newImg)
 
     for(let i = 0; i < image.length; i++){
         let extraCard = image[i].image
-        let newImg = document.createElement('img')
         newImg.src = extraCard
-        console.log(extraCard)
-
-         hitIMG.append(newImg)
-         newImg.append(extraCard)
+        // console.log(extraCard)
     }
+        newImg.append(extraCard)
+    
     let addToScore = oneCardResponse
     console.log(addToScore)
     currentScore(addToScore)
@@ -121,7 +124,7 @@ const stayAction = async(res) => {
 
     let compResponse = await axios.get(compURL)
 
-    let stayCards = document.querySelector("#startGame")
+    let stayCards = document.querySelector("#compDIV")
     let compCards = compResponse.data.cards
     console.log(compCards)
 
