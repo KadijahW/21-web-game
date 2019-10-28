@@ -45,19 +45,6 @@ body {
   justify-content: center;
 }
 
-/* #hitBtn, #stayBtn{
-display: flex;
-flex: wrap;
- background-color: #4CAF50;
- color: white;
- padding: 15px 32px;
- text-align: center;
- font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  justify-content: center;
-} */
-
 #score{
     /* font-size: 40px; */
     font-weight: bold;

@@ -2,8 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
     startButton()
 })
 
-let count = 0;
-let compCount = 0;
 
 
 const startButton = () => {
@@ -19,7 +17,7 @@ const getCards = async() => {
         // console.log(response)
               startGame(response)
     }catch(err){
-        console.log(err)
+        // console.log(err)
     }
 }
 
@@ -55,26 +53,59 @@ currentScore(cardsDealt)
 gameButtons()
 }
 
+    let count = 0;
     const currentScore = (arr) => {
     let para = document.querySelector('#scorePTag')
    
-        console.log(arr)
+        // console.log(arr)
 
    for(let i = 0; i < arr.length; i++){
    let score = arr[i].value
-   // console.log(score)
+    //    console.log(score)
        if(score === "KING" || score === "QUEEN" || score === "JACK"){
-           score = parseInt("10") 
-           count += score
+        //    score += 10 
+           count += 10
        }else if(score === "ACE"){
-           score = parseInt("1")
-           count += score
-       }
-           count += parseInt(score)    
+        //    score += 1
+           count += 1
+       } else {
+        count += parseInt(score) 
+       }  
     }
+    // console.log(count)
     para.innerText = "Player Score: " + count
-    //    check21()
+    checkUserScore(count)
+      // check21(count)
    }
+
+   const checkUserScore = (score) => {
+    if (score === 21){
+    let heading = document.querySelector('#heading')
+    let youWon_heading = document.createElement('h1')
+    youWon_heading.innerText = "You Won!"
+    heading.append(youWon_heading)
+    }
+    else if(score > 21){
+        busted()
+    }
+   }
+
+const busted = () => {
+let heading = document.querySelector('#heading')
+let busted_heading = document.createElement('h1')
+busted_heading.innerText = "Busted!"
+heading.append(busted_heading)
+removeButtons()
+}
+
+const removeButtons = () => {
+let hit_btn = document.querySelector('#hitBtn')
+let stay_btn = document.querySelector('#stayBtn')
+let hit_and_stayBtn = document.querySelector("#gameButtons")
+hit_and_stayBtn.removeChild(hit_btn)
+hit_and_stayBtn.removeChild(stay_btn)
+
+}
 
 const gameButtons = () => {
     let gameButtonDiv = document.querySelector("#gameButtons")
@@ -113,7 +144,7 @@ const hitAction = async(res) => {
     }
     
     let addToScore = oneCardResponse.data.cards
-    console.log(addToScore)
+    // console.log(addToScore)
     currentScore(addToScore)
     // console.log(image)
 }
@@ -125,7 +156,7 @@ const stayAction = async(res) => {
 
     let stayCards = document.querySelector("#compDIV")
     let compCards = compResponse.data.cards
-    console.log(compCards)
+    // console.log(compCards)
 
     for(let i = 0; i < compCards.length; i++){
         let compCardImage = compCards[i].image
@@ -139,23 +170,47 @@ const stayAction = async(res) => {
     computerCount(compCards)
 }
 
+let compCount = 0;
 const computerCount = (arr) => {
     let para = document.querySelector('#compScorePTag')
    
 for(let i = 0; i < arr.length; i++){
-let score = arr[i].value
+    let score = arr[i].value
 
    if(score === "KING" || score === "QUEEN" || score === "JACK"){
-       score = parseInt("10") 
-       compCount += score
+       compCount += 10
    }else if(score === "ACE"){
-       score = parseInt("1")
-       compCount += score
+    
+       compCount += 1
+   } else {
+    compCount += parseInt(score)  
    }
-       compCount += parseInt(score)    
+       console.log(compCount)  
 }
 para.innerText = "Computer Score: " + compCount
-//    check21()
+  checkComputerScore(compCount)
    }
   
+const checkComputerScore =(score) => {
+    if(score === 21){
+        console.log("computer wins!")
+    }else if(score > 21){
+        console.log("You win")
+    }else{
+        check21()
+    }
+} 
+
+const check21 = (count, compCount) => {
+if(count === compCount){
+    console.log("its a tie!")
+}else if(count > compCount){
+    console.log("You win!")
+}else{
+    console.log("computer wins")
+}
+removeButtons()
+}
+
+
 
