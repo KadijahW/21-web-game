@@ -51,31 +51,32 @@ currentScore(res)
 }
 
 const currentScore = (res) => {
-let scoreBoard = document.querySelector("#score")
-let para = document.createElement('p')
-para.innerText = "Current Score: "
-let currScore = res.data.cards
-console.log(currScore)
-let count = 0;
-for(let i = 0; i < currScore.length; i++){
-let score = currScore[i].value
-// console.log(score)
-    if(score === "KING" || score === "QUEEN" || score === "JACK"){
-        score = parseInt("10") 
-        count += score
-    }else if(score === "ACE"){
-        score = parseInt("1")
-        count += score
-    }else{
-        count += parseInt(score)    
+    let scoreBoard = document.querySelector("#score")
+    let para = document.createElement('p')
+   
+   para.innerText = "Current Score: "
+    let currScore = res.data.cards
+    	console.log(currScore)
+   let count = 0;
+   for(let i = 0; i < currScore.length; i++){
+   let score = currScore[i].value
+   // console.log(score)
+       if(score === "KING" || score === "QUEEN" || score === "JACK"){
+           score = parseInt("10") 
+           count += score
+       }else if(score === "ACE"){
+           score = parseInt("1")
+           count += score
+       }else{
+           count += parseInt(score)    
+       }
     }
-}
-    // console.log(count)
-    scoreBoard.append(para)
-    para.append(count)
-  
-    gameButtons()
-}
+       // console.log(count)
+       scoreBoard.append(para)
+       para.append(count)
+       
+       gameButtons()
+   }
 
 const gameButtons = () => {
     let gameButtonDiv = document.querySelector("#gameButtons")
@@ -104,16 +105,34 @@ const hitAction = async(res) => {
         let extraCard = image[i].image
         let newImg = document.createElement('img')
         newImg.src = extraCard
-        // console.log(extraCard)
+        console.log(extraCard)
 
          hitIMG.append(newImg)
          newImg.append(extraCard)
     }
+    let addToScore = oneCardResponse
+    console.log(addToScore)
+    currentScore(addToScore)
     // console.log(image)
 }
 
-const stayAction = () => {
-    // console.log("hi")
-    event.preventDefault()
+const stayAction = async(res) => {
+    compURL = `https://deckofcardsapi.com/api/deck/${deckID}/draw/?count=3`
+
+    let compResponse = await axios.get(compURL)
+
+    let stayCards = document.querySelector("#startGame")
+    let compCards = compResponse.data.cards
+    console.log(compCards)
+
+    for(let i = 0; i < compCards.length; i++){
+        let compCardImage = compCards[i].image
+        let compImg = document.createElement('img')
+        compImg.src = compCardImage
+
+        stayCards.append(compImg)
+        compImg.append(compCardImage)
+       
+    }
 
 }
