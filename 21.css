@@ -7,7 +7,7 @@ body {
   h1{
     font-size: 40px;
       text-align: center;
-      text-decoration: underline;
+      /* text-decoration: underline; */
       color: aliceblue;
 
   }
@@ -28,21 +28,44 @@ body {
   }
 
 #startGame button{
- position:absolute;
- transition: .5s ease;
- top: 50%;
- left: 45%;
+ font-weight: bold;
+ position: absolute;
  background-color: #4CAF50;
-  border: none;
+ opacity: 0.5;
+  border: 2px solid white;
+  border-radius: 15px;
   color: white;
-  padding: 15px 32px;
-  text-align: center;
+  padding: 5px 100px;
   text-decoration: none;
-  display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
-  justify-content: center;
+    left: 40%;
+}
+
+#footer div{
+    position:relative;
+    margin-top:20%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: row;
+    justify-content: space-around;
+    text-align: center;
+}
+
+#hitBtn{
+    justify-content: space-between;
+    border-radius: 15px;
+    font-size: 16px;
+    padding: 5px 100px;
+
+}
+
+#stayBtn{
+    justify-content: space-between;
+    border-radius: 15px;
+    font-size: 16px;
+    padding: 5px 100px;
 }
 
 #score{
@@ -61,5 +84,4 @@ body {
 
 #compScorePTag{
     justify-content: flex-end;
-
 }
