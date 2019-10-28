@@ -185,7 +185,7 @@ for(let i = 0; i < arr.length; i++){
    } else {
     compCount += parseInt(score)  
    }
-       console.log(compCount)  
+    //    console.log(compCount)  
 }
 para.innerText = "Computer Score: " + compCount
   checkComputerScore(compCount)
@@ -193,21 +193,45 @@ para.innerText = "Computer Score: " + compCount
   
 const checkComputerScore =(score) => {
     if(score === 21){
-        console.log("computer wins!")
+        // console.log("computer wins!")
+    let heading = document.querySelector('#heading')
+    let compWon_heading = document.createElement('h1')
+    compWon_heading.innerText = "Computer Wins!"
+    heading.append(compWon_heading)
+    removeButtons()
     }else if(score > 21){
-        console.log("You win")
+    let heading = document.querySelector('#heading')
+    let youWon_heading = document.createElement('h1')
+    youWon_heading.innerText = "You Won!"
+    heading.append(youWon_heading)
+    removeButtons()
+
     }else{
-        check21()
+        check21(count, compCount)
     }
 } 
 
 const check21 = (count, compCount) => {
+    console.log(count)
+    console.log("COmp " , compCount)
 if(count === compCount){
-    console.log("its a tie!")
+    // console.log("its a tie!")
+    let heading = document.querySelector('#heading')
+    let tie_heading = document.createElement('h1')
+    tie_heading.innerText = "it's a tie!"
+    heading.append(tie_heading)
 }else if(count > compCount){
-    console.log("You win!")
+    // console.log("You win!")
+    let heading = document.querySelector('#heading')
+    let youWon_heading = document.createElement('h1')
+    youWon_heading.innerText = "You Won!"
+    heading.append(youWon_heading)
 }else{
-    console.log("computer wins")
+    // console.log("computer wins")
+    let heading = document.querySelector('#heading')
+    let compWon_heading = document.createElement('h1')
+    compWon_heading.innerText = "Computer Wins!"
+    heading.append(compWon_heading)
 }
 removeButtons()
 }
