@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 let count = 0;
+let compCount = 0;
 
 
 const startButton = () => {
@@ -55,11 +56,8 @@ gameButtons()
 }
 
     const currentScore = (arr) => {
-    // let scoreBoard = document.querySelector("#score")
     let para = document.querySelector('#scorePTag')
    
-    // let currScore = addToScore
-        // console.log(currScore)
         console.log(arr)
 
    for(let i = 0; i < arr.length; i++){
@@ -74,8 +72,8 @@ gameButtons()
        }
            count += parseInt(score)    
     }
-    para.innerText = "Current Score: " + count
-       
+    para.innerText = "Player Score: " + count
+    //    check21()
    }
 
 const gameButtons = () => {
@@ -116,7 +114,7 @@ const hitAction = async(res) => {
     
     let addToScore = oneCardResponse.data.cards
     console.log(addToScore)
-    console.log(currentScore(addToScore))
+    currentScore(addToScore)
     // console.log(image)
 }
 
@@ -138,21 +136,26 @@ const stayAction = async(res) => {
         compImg.append(compCardImage)
        
     }
-
+    computerCount(compCards)
 }
 
-// const total = (divName) => {
-//     let h2 = document.querySelector(`#${div.id}`)
-//    if(!h2){
-//        let score = document.createElement('h2');
-//        score.id = div.id + 'h2'//'h2'
-//        score.innerText = total
-//        div.appendChild(score);
-//    }else{
-//        h2.innerText = total
-//    }
-//    checkWinner();
-// }
+const computerCount = (arr) => {
+    let para = document.querySelector('#compScorePTag')
+   
+for(let i = 0; i < arr.length; i++){
+let score = arr[i].value
 
-//check if 21
-//total count
+   if(score === "KING" || score === "QUEEN" || score === "JACK"){
+       score = parseInt("10") 
+       compCount += score
+   }else if(score === "ACE"){
+       score = parseInt("1")
+       compCount += score
+   }
+       compCount += parseInt(score)    
+}
+para.innerText = "Computer Score: " + compCount
+//    check21()
+   }
+  
+

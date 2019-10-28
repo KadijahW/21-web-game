@@ -59,8 +59,20 @@ flex: wrap;
 } */
 
 #score{
-    font-size: 40px;
-    /* font-weight: bold; */
+    /* font-size: 40px; */
+    font-weight: bold;
     color: aliceblue;
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: space-between
+}
+
+#scorePTag{
+    justify-content: flex-start;
+}
+
+#compScorePTag{
+    justify-content: flex-end;
 
 }
