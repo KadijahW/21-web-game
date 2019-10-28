@@ -7,7 +7,8 @@ body {
   h1{
     font-size: 40px;
       text-align: center;
-    color: aliceblue;
+      text-decoration: underline;
+      color: aliceblue;
 
   }
 
@@ -59,8 +60,7 @@ flex: wrap;
 
 #score{
     font-size: 40px;
-    font-weight: bold;
+    /* font-weight: bold; */
     color: aliceblue;
-  text-align: center;
 
 }

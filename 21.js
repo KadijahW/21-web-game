@@ -2,6 +2,9 @@ document.addEventListener("DOMContentLoaded", () => {
     startButton()
 })
 
+let count = 0;
+
+
 const startButton = () => {
     const startButton = document.querySelector("#startGame")
     startButton.addEventListener('click', getCards)
@@ -47,19 +50,20 @@ for(let i = 0; i < cardsDealt.length; i++){
      img.append(playerCards)
     // console.log(playerCards)
  }
-currentScore(res)
+currentScore(cardsDealt)
+gameButtons()
 }
 
-const currentScore = (res) => {
-    let scoreBoard = document.querySelector("#score")
-    let para = document.createElement('p')
+    const currentScore = (arr) => {
+    // let scoreBoard = document.querySelector("#score")
+    let para = document.querySelector('#scorePTag')
    
-   para.innerText = "Current Score: "
-    let currScore = res.data.cards
-    	console.log(currScore)
-   let count = 0;
-   for(let i = 0; i < currScore.length; i++){
-   let score = currScore[i].value
+    // let currScore = addToScore
+        // console.log(currScore)
+        console.log(arr)
+
+   for(let i = 0; i < arr.length; i++){
+   let score = arr[i].value
    // console.log(score)
        if(score === "KING" || score === "QUEEN" || score === "JACK"){
            score = parseInt("10") 
@@ -67,15 +71,11 @@ const currentScore = (res) => {
        }else if(score === "ACE"){
            score = parseInt("1")
            count += score
-       }else{
-           count += parseInt(score)    
        }
+           count += parseInt(score)    
     }
-       // console.log(count)
-       scoreBoard.append(para)
-       para.append(count)
+    para.innerText = "Current Score: " + count
        
-       gameButtons()
    }
 
 const gameButtons = () => {
@@ -110,12 +110,13 @@ const hitAction = async(res) => {
         let extraCard = image[i].image
         newImg.src = extraCard
         // console.log(extraCard)
+        newImg.append(extraCard)        
+
     }
-        newImg.append(extraCard)
     
-    let addToScore = oneCardResponse
+    let addToScore = oneCardResponse.data.cards
     console.log(addToScore)
-    currentScore(addToScore)
+    console.log(currentScore(addToScore))
     // console.log(image)
 }
 
@@ -139,3 +140,19 @@ const stayAction = async(res) => {
     }
 
 }
+
+// const total = (divName) => {
+//     let h2 = document.querySelector(`#${div.id}`)
+//    if(!h2){
+//        let score = document.createElement('h2');
+//        score.id = div.id + 'h2'//'h2'
+//        score.innerText = total
+//        div.appendChild(score);
+//    }else{
+//        h2.innerText = total
+//    }
+//    checkWinner();
+// }
+
+//check if 21
+//total count
