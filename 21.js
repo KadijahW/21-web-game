@@ -3,13 +3,13 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 
-
+//when start game button clicks
 const startButton = () => {
     const startButton = document.querySelector("#startGame")
     startButton.addEventListener('click', getCards)
 
 }
-
+//fetchs card using axios
 const getCards = async() => {
     let url = "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1"
     try{
@@ -21,6 +21,7 @@ const getCards = async() => {
     }
 }
 
+//uses the deck ID to get cards from API, and removes button
 const startGame = async(response) => {
 deckID = response.data.deck_id
 // console.log(deckID)
@@ -35,6 +36,7 @@ let res = await axios.get(deckidURL)
 getPlayerCards(res)
 }
 
+// calls the div created for player and append the images from API to that DIV
 const getPlayerCards = (res) => {
     let  startGameDIV = document.querySelector("#playerDIV")
     let cardsDealt = res.data.cards
@@ -53,8 +55,10 @@ currentScore(cardsDealt)
 gameButtons()
 }
 
+    //creates a global count for player
     let count = 0;
-    const currentScore = (arr) => {
+    //grabs value of each card and sets it to a number and adss it to the global count then calls check score function.
+const currentScore = (arr) => {
     let para = document.querySelector('#scorePTag')
    
         // console.log(arr)
@@ -78,7 +82,8 @@ gameButtons()
       // check21(count)
    }
 
-   const checkUserScore = (score) => {
+   //creates a h1 tag that says if player won of went over 21 then calls busted function 
+const checkUserScore = (score) => {
     if (score === 21){
     let heading = document.querySelector('#heading')
     let youWon_heading = document.createElement('h1')
@@ -91,6 +96,7 @@ gameButtons()
     }
    }
 
+   // creates h1 tag that tells player they went over 21
 const busted = () => {
 let heading = document.querySelector('#heading')
 let busted_heading = document.createElement('h1')
@@ -99,6 +105,7 @@ heading.append(busted_heading)
 removeButtons()
 }
 
+//removes buttons after either player or computer wins or loses
 const removeButtons = () => {
 let hit_btn = document.querySelector('#hitBtn')
 let stay_btn = document.querySelector('#stayBtn')
@@ -108,6 +115,7 @@ hit_and_stayBtn.removeChild(stay_btn)
 
 }
 
+// creates and appends the HIT and STAY button once game starts
 const gameButtons = () => {
     let gameButtonDiv = document.querySelector("#gameButtons")
  
@@ -125,6 +133,8 @@ const gameButtons = () => {
     gameButtonDiv.append(stayButton)
 }
 
+//when hit button is pressed it grabs one card from the API and appeneds the image, 
+//it also takes the data and calls currentScore where it adds the value to the global count
 const hitAction = async(res) => {
     // console.log(res.data)
     url = `https://deckofcardsapi.com/api/deck/${deckID}/draw/?count=1`
@@ -150,6 +160,8 @@ const hitAction = async(res) => {
     // console.log(image)
 }
 
+// when stay button is pressed it grabs 3 card from the API and appends it to the computer div
+//computer count is called and passes the card values
 const stayAction = async(res) => {
     compURL = `https://deckofcardsapi.com/api/deck/${deckID}/draw/?count=3`
 
@@ -171,7 +183,9 @@ const stayAction = async(res) => {
     computerCount(compCards)
 }
 
+//creates global variable for computer
 let compCount = 0;
+    //grabs value of each card and sets it to a number and adds it to the global count then calls check score function.
 const computerCount = (arr) => {
     let para = document.querySelector('#compScorePTag')
    
@@ -192,6 +206,7 @@ para.innerText = compCount
   checkComputerScore(compCount)
    }
   
+   //check if computer = to 21 or greater and removes the buttons
 const checkComputerScore =(score) => {
     if(score === 21){
         // console.log("computer wins!")
@@ -212,6 +227,7 @@ const checkComputerScore =(score) => {
     }
 } 
 
+//checks if you or computer wins and removes the buttons
 const check21 = (count, compCount) => {
     // console.log(count)
     // console.log("COmp " , compCount)
@@ -236,6 +252,10 @@ if(count === compCount){
 }
 removeButtons()
 }
+
+// const ResetButton = () =>{
+
+// }
 
 
 
