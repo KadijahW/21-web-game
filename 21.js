@@ -73,7 +73,7 @@ gameButtons()
        }  
     }
     // console.log(count)
-    para.innerText = "Player Score: " + count
+    para.innerText =  count
     checkUserScore(count)
       // check21(count)
    }
@@ -188,7 +188,7 @@ for(let i = 0; i < arr.length; i++){
    }
     //    console.log(compCount)  
 }
-para.innerText = "Computer Score: " + compCount
+para.innerText = compCount
   checkComputerScore(compCount)
    }
   
