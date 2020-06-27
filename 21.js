@@ -14,6 +14,7 @@ const getCards = async() => {
     let url = "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1"
     try{
         let response = await axios.get(url)
+        console.log(response)
         // console.log(response)
               startGame(response)
     }catch(err){
